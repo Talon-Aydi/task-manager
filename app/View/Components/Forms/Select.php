@@ -4,26 +4,43 @@ namespace App\View\Components\Forms;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
-use App\Enums\TaskStatus; 
+use UnitEnum;
 
 class Select extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public Collection $options;
+    public string $selectId;
+
+    public function __construct($options, $selectId)
     {
-        //
+        $this->options = $this->formatCollection($options);
+        $this->selectId = $selectId; 
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
+    public function formatCollection($options): Collection 
     {
-        return view('components.forms.select', [
-            'taskStates' => TaskStatus::cases()
-        ]);
+        return collect($options)->map(function ($option) {
+            return match(true) {
+                $option instanceof UnitEnum => [
+                    'id'    => $option->name ?? 'Onbekend', 
+                    'label' => $option->value
+                ],
+                is_object($option) => [
+                    'id'    => $option->id ?? 'Onbekend',
+                    'label' => $option->naam ?? 'Onbekend'
+                ], 
+                default => [
+                    'id'    => $option, 
+                    'label' => $option
+                ] 
+            };
+        });
+    }
+
+    public function render(): View
+    {
+        return view('components.forms.select');
     }
 }

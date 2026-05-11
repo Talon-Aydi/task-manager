@@ -5,15 +5,20 @@ namespace App\View\Components\Tasks;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\Category; 
+use App\Enums\TaskStatus; 
 
 class Form extends Component
 {
+    public array $states; 
+    public $categories;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        //
+        $this->states = TaskStatus::cases();
+        $this->categories = Category::all();
     }
 
     /**

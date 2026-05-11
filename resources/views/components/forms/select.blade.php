@@ -1,12 +1,13 @@
 <div class="form-floating mb-3">
   <select 
-    class="form-select w-full" 
-    id="floatingSelect" 
-    aria-label="Floating label select example">
-    @foreach ($taskStates as $status )
-        <option value="{{$status->name}}">{{$status
-            }}</option>
+    class="form-select" 
+    id="{{$selectId}}" 
+    name="{{$selectId}}">
+    @foreach ($options as $option)
+        <option value="{{ $option['id'] }}">
+          {{  $option['label'] }}
+        </option>
     @endforeach
   </select>
-  <label for="floatingSelect">Status</label>
+  <label for="{{$selectId}}">{{$selectId}}</label>
 </div>

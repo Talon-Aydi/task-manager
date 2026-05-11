@@ -1,20 +1,32 @@
 <div>
-    <div class="bg-pink-200 w-[10rem] rounded-t-xl p-2 text-center">
-        <span class="text-[20px] font-extrabold text-white">
-            Create task
+    <form 
+        method="POST"
+        class="flex flex-col space-y-3 p-10 border bg-gray-50 shadow-sm border-grey-800 rounded-lg">
+       @csrf
+        <span class="text-[20px] text-red-800">
+            New task
         </span>
-    </div>
-    <form class="flex flex-col bg-pink-200 p-10 rounded-tr-xl rounded-b-xl">
-        <div class="flex flex-row space-x-4">
-            <div class="flex flex-col">
-                <x-forms.input inputType="text" inputLabel="Titel" inputId='titelId' inputPlaceholder='Jane doe' />
-                <x-forms.input inputType="text" inputLabel="Omschrijving" inputId='titelId' inputPlaceholder='Jane doe' />
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="flex flex-col">
-                <x-forms.select />
-                <x-forms.input inputType="datetime-local" inputLabel="Deadline" inputId='deadlineId' inputPlaceholder='Jane doe' />
+        @endif
+        <div class="flex flex-col space-y-4">
+            <x-forms.input inputType="text" inputLabel="Titel" inputId='titel'/>
+            <x-forms.text-area textAreaTitle="Omschrijving" textAreaId='omschrijving' />
+            <x-forms.select selectId="status" :options="$states" />
+            
+            <div class="flex flex-row space-x-4">
+                <x-forms.input inputType="date" inputLabel="Deadline" inputId='deadline_date'/>
+                <x-forms.input inputType="time" inputLabel="Deadline" inputId='deadline_time' inputPlaceholder='12:00' />
             </div>
+
+            <x-forms.select selectId="category_id" :options="$categories" />
         </div>
-        <button type="submit" class="btn btn-primary w-[10rem]">Create task</button>
+        <button type="submit" class="btn btn-dark !ml-auto w-[10rem] h-[3rem]">Create task</button>
     </form>
 </div>
