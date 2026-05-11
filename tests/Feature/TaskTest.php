@@ -39,13 +39,7 @@ test('task is created in database', function () use ($taskMock) {
 
 test('task does not pass validation on empty form', function () {
     // Act
-    $response = $this->post('/', [
-        'titel'         => '',
-        'omschrijving'  => '', 
-        'status'        => '',
-        'deadline'      => '',
-        'category_id'   => ''
-    ]);
+    $response = $this->post('/', []);
 
     // Assert
     $response->assertStatus(302);
