@@ -14,7 +14,7 @@ beforeEach(function () {
     // Assign
     Category::create([
         'id'    => 1,
-        'naam'  => 'Uncategorized'
+        'name'  => 'Uncategorized'
     ]);
 
     $this->taskMock = [

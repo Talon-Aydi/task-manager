@@ -39,7 +39,7 @@ class TaskRequest extends FormRequest
             'omschrijving'  => ['required', 'string'],
             'status'        => ['required', Rule::enum(TaskStatus::class)],
             'deadline'      => ['required', 'date', 'after:today'],
-            'category_id'      => ['required', 'exists:categories,id'],
+            'category_id'   => ['required', 'exists:categories,id'],
         ];
     }
 }

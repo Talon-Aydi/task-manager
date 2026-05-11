@@ -11,16 +11,23 @@ use UnitEnum;
 class Select extends Component
 {
     public Collection $options;
-    public string $selectId;
 
-    public function __construct($options, $selectId)
+    public function __construct(
+        $options, 
+        public string $labelName = 'label',
+        public string $inputName = 'name',
+        public string $idKey = 'id',
+        public string $valueKey = 'value')
     {
+        $this->labelName = $labelName;
+        $this->inputName = $inputName; 
+        $this->idKey = $idKey; 
+        $this->valueKey = $valueKey;
         $this->options = $this->formatCollection($options);
-        $this->selectId = $selectId; 
     }
 
     public function formatCollection($options): Collection 
-    {
+    {   
         return collect($options)->map(function ($option) {
             return match(true) {
                 $option instanceof UnitEnum => [
@@ -28,8 +35,8 @@ class Select extends Component
                     'label' => $option->value
                 ],
                 is_object($option) => [
-                    'id'    => $option->id ?? 'Onbekend',
-                    'label' => $option->naam ?? 'Onbekend'
+                    'id'    => $option->{$this->idKey} ?? null,
+                    'label' => $option->{$this->valueKey} ?? null
                 ], 
                 default => [
                     'id'    => $option, 

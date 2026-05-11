@@ -13,6 +13,6 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::firstOrCreate(['naam' => 'Uncategorized']);
+        Category::firstOrCreate(['name' => 'Uncategorized']);
     }
 }
