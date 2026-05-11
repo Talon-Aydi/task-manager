@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 
+#[Fillable(['id', 'naam'])]
 class Category extends Model
 {
     public function task()
