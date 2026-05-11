@@ -24,7 +24,7 @@ class Select extends Component
         return collect($options)->map(function ($option) {
             return match(true) {
                 $option instanceof UnitEnum => [
-                    'id'    => $option->name ?? 'Onbekend', 
+                    'id'    => $option->value ?? 'Onbekend', 
                     'label' => $option->value
                 ],
                 is_object($option) => [
