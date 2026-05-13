@@ -20,7 +20,6 @@ class Form extends Component
     {
         $this->states = CollectionFormatter::formatCollection(TaskStatus::cases());
         $this->categories = CollectionFormatter::formatCollection(Category::all(), 'id', 'name');
-        dd($this->categories);
     }
 
     /**
