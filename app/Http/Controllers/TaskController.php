@@ -12,7 +12,10 @@ class TaskController extends Controller
 {
     public function show(): View
     {
-        return view('tasks.overview');
+        $tasks = Task::all();
+        return view('tasks.overview', [
+            'tasks' => $tasks,
+        ]);
     }
 
     public function store(TaskRequest $request): RedirectResponse 
