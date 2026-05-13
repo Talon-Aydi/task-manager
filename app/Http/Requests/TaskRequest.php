@@ -10,9 +10,6 @@ Use App\Enums\TaskStatus;
 
 class TaskRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
@@ -27,19 +24,21 @@ class TaskRequest extends FormRequest
         }
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
             'titel'         => ['required', 'string', 'max:255'],
             'omschrijving'  => ['required', 'string'],
             'status'        => ['required', Rule::enum(TaskStatus::class)],
-            'deadline'      => ['required', 'date', 'after:today'],
+            'deadline'      => ['required', 'date', 'after:now'],
             'category_id'   => ['required', 'exists:categories,id'],
+        ];
+    }
+
+    public function messages(): array 
+    {
+        return [
+            'deadline.after' => 'Deadlines can only be in the future.',
         ];
     }
 }

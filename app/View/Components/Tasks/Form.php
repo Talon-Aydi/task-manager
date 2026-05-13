@@ -7,18 +7,20 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use App\Models\Category; 
 use App\Enums\TaskStatus; 
+use App\Utils\Formatter\CollectionFormatter;
 
 class Form extends Component
 {
-    public array $states; 
+    public $states; 
     public $categories;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        $this->states = TaskStatus::cases();
-        $this->categories = Category::all();
+        $this->states = CollectionFormatter::formatCollection(TaskStatus::cases());
+        $this->categories = CollectionFormatter::formatCollection(Category::all(), 'id', 'name');
+        dd($this->categories);
     }
 
     /**

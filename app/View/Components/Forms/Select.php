@@ -14,36 +14,12 @@ class Select extends Component
 
     public function __construct(
         $options, 
-        public string $labelName = 'label',
-        public string $inputName = 'name',
-        public string $idKey = 'id',
-        public string $valueKey = 'value')
+        public string $labelName = 'Label',
+        public string $inputName = 'name')
     {
         $this->labelName = $labelName;
         $this->inputName = $inputName; 
-        $this->idKey = $idKey; 
-        $this->valueKey = $valueKey;
-        $this->options = $this->formatCollection($options);
-    }
-
-    public function formatCollection($options): Collection 
-    {   
-        return collect($options)->map(function ($option) {
-            return match(true) {
-                $option instanceof UnitEnum => [
-                    'id'    => $option->value ?? 'Onbekend', 
-                    'label' => $option->value
-                ],
-                is_object($option) => [
-                    'id'    => $option->{$this->idKey} ?? null,
-                    'label' => $option->{$this->valueKey} ?? null
-                ], 
-                default => [
-                    'id'    => $option, 
-                    'label' => $option
-                ] 
-            };
-        });
+        $this->options = $options;
     }
 
     public function render(): View
