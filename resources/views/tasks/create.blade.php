@@ -1,6 +1,8 @@
-<div>
-    <form 
+<x-layout>
+    <div class="w-[30rem] m-auto">
+        <form 
         id="task-form"
+        action="/"
         method="POST"
         class="flex flex-col space-y-3 p-10 border bg-gray-50 shadow-sm border-grey-800 rounded-lg">
        @csrf
@@ -30,4 +32,6 @@
         </div>
         <button type="submit" class="btn btn-dark !ml-auto w-[10rem] h-[3rem]">Create task</button>
     </form>
-</div>
+    </div>
+    
+</x-layout> 

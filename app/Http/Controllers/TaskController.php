@@ -7,14 +7,28 @@ use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Category; 
+use App\Enums\TaskStatus; 
+use App\Utils\Formatter\CollectionFormatter;
 
 class TaskController extends Controller
 {
-    public function show(): View
+    public function index(): View
     {
         $tasks = Task::all();
         return view('tasks.overview', [
             'tasks' => $tasks,
+        ]);
+    }
+
+    public function create(): View
+    {
+        $states = CollectionFormatter::formatCollection(TaskStatus::cases());
+        $categories = CollectionFormatter::formatCollection(Category::all(), 'id', 'name');
+
+        return view('tasks.create', [
+            'states' => $states,
+            'categories' => $categories,
         ]);
     }
 
