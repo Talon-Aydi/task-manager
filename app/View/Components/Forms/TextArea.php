@@ -8,15 +8,11 @@ use Illuminate\View\Component;
 
 class TextArea extends Component
 {
-    public String $textAreaId;
-    public String $textAreaTitle;
     /**
      * Create a new component instance.
      */
-    public function __construct($textAreaId, $textAreaTitle)
+    public function __construct(public String $textAreaId, public String $textAreaTitle, public ?string $value = '')
     {
-        $this->textAreaId = $textAreaId;
-        $this->textAreaTitle = $textAreaTitle;
     }
 
     /**

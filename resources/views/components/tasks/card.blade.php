@@ -11,7 +11,7 @@
                 <i class="bi bi-three-dots-vertical"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Edit</a></li>
+                <li><a class="dropdown-item" href="{{$task->id}}/edit">Edit</a></li>
                 <li><a class="dropdown-item" href="#">Delete</a></li>
             </ul>
         </div>

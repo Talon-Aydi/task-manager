@@ -10,16 +10,13 @@ use UnitEnum;
 
 class Select extends Component
 {
-    public Collection $options;
 
     public function __construct(
-        $options, 
+        public Collection $options, 
         public string $labelName = 'Label',
-        public string $inputName = 'name')
+        public string $inputName = 'name',
+        public $value = '')
     {
-        $this->labelName = $labelName;
-        $this->inputName = $inputName; 
-        $this->options = $options;
     }
 
     public function render(): View
