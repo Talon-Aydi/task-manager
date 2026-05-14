@@ -5,7 +5,7 @@
     name="{{$inputName}}">
     @foreach ($options as $option)
         <option 
-            value="{{ $option['label'] }}" 
+            value="{{ $option['id'] }}" 
             @selected($value === $option['label'])>
           {{ $option['label'] }}
         </option>

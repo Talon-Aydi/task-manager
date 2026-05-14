@@ -6,7 +6,7 @@
     <div class="w-[30rem] m-auto">
         <form 
         id="task-form"
-        action="/"
+        action="{{ $isEdit ? route('tasks.update', $task->id) : route('tasks.store') }}"
         method="POST"
         class="flex flex-col space-y-3 p-10 border bg-gray-50 shadow-sm border-grey-800 rounded-lg">
        @csrf
@@ -37,7 +37,7 @@
 
             <x-forms.select idKey="id" inputName="category_id" labelName="category" valueKey="naam" :options="$categories" :value="old('category_id', $task->category_id ?? '')"/>
         </div>
-        <button type="submit" class="btn btn-dark !ml-auto w-[10rem] h-[3rem]">Create task</button>
+        <button type="submit" class="btn btn-dark !ml-auto w-[10rem] h-[3rem]">{{ $isEdit ? 'Update task' : 'Create task' }}</button>
     </form>
     </div>
     

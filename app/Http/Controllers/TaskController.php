@@ -34,8 +34,15 @@ class TaskController extends Controller
 
     public function store(TaskRequest $request): RedirectResponse 
     {
-        $validated = $request->validated();
-        Task::create($validated); 
+        return DB::transaction(function () use ($request) {
+            $task = Task::create($request->validated());
+            return redirect()->route('task.overview');
+        });
+    }
+
+    public function update(TaskRequest $request, Task $task): RedirectResponse 
+    {   
+        $task->update($request->validated());
 
         return redirect()->route('tasks.overview')->with('success', 'Taak aangemaakt');
     }
