@@ -27,7 +27,7 @@ class TaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'titel'         => ['required', 'string', 'max:255'],
+            'titel'         => ['required', 'string', 'max:25'],
             'omschrijving'  => ['required', 'string'],
             'status'        => ['required', Rule::enum(TaskStatus::class)],
             'deadline'      => ['required', 'date', 'after:now'],

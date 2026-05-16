@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -10,6 +11,8 @@ use App\Enums\TaskStatus;
 #[Fillable(['titel', 'omschrijving', 'status', 'deadline', 'category_id'])]
 class Task extends Model
 {
+    use HasFactory;
+
     protected $casts = [
         'status' => TaskStatus::class,
         'deadline' => 'datetime',
