@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use App\Utils\Formatter\CollectionFormatter;
@@ -10,6 +11,8 @@ use Illuminate\Support\Collection;
 #[Fillable(['id', 'name'])]
 class Category extends Model
 {
+    use HasFactory;
+    
     public function task()
     {
         return $this->hasOne(Task::class);
