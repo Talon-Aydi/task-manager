@@ -13,8 +13,6 @@ use App\Enums\TaskStatus;
 
 class TaskController extends Controller
 {   
-    public CollectionFormatter $formatter; 
-
     public function index(): View
     {
         return view('tasks.overview', [
