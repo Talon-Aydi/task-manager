@@ -6,15 +6,12 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TaskRequest; 
 use App\Models\Task;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Category; 
 use App\Enums\TaskStatus; 
 
 class TaskController extends Controller
 {   
-    public CollectionFormatter $formatter; 
-
     public function index(): View
     {
         return view('tasks.overview', [
@@ -41,16 +38,16 @@ class TaskController extends Controller
 
     public function store(TaskRequest $request)
     {
-        DB::transaction(fn() => Task::create($request->validated()));
+        Task::create($request->validated());
     }
 
     public function update(TaskRequest $request, Task $task)
     {   
-        DB::transaction(fn() => $task->update($request->validated()));
+        $task->update($request->validated());
     }
 
     public function delete(Task $task)
     {
-        DB::transaction(fn() => $task->delete(), attempts: 3);
+        $task->delete();
     }
 }
