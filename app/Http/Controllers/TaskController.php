@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TaskRequest; 
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -32,19 +33,19 @@ class TaskController extends Controller
         return $this->renderFormView($task);
     }
 
-    public function store(TaskRequest $request): RedirectResponse 
+    public function store(TaskRequest $request)
     {
-        return DB::transaction(function () use ($request) {
-            $task = Task::create($request->validated());
-            return redirect()->route('task.overview');
-        });
+        DB::transaction(fn() => Task::create($request->validated()));
     }
 
-    public function update(TaskRequest $request, Task $task): RedirectResponse 
+    public function update(TaskRequest $request, Task $task)
     {   
         $task->update($request->validated());
+    }
 
-        return redirect()->route('tasks.overview')->with('success', 'Taak aangemaakt');
+    public function delete(Task $task)
+    {
+        DB::transaction(fn() => $task->delete(), attempts: 3);
     }
 
     public function renderFormView($task = null): View 

@@ -2,11 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Middleware\RedirectAfterWrite;
 
 Route::controller(TaskController::class)->name('tasks.')->group(function () {
     Route::get('/', 'index')->name('overview');
     Route::get('/create', 'create')->name('create');
     Route::get('/{task}/edit', 'edit')->name('edit');
-    Route::post('/', 'store')->name('store');
-    Route::put('/{task}', 'update')->name('update');
+    
+    Route::middleware(RedirectAfterWrite::class)->group(function () {
+        Route::post('/', 'store')->name('store');
+        Route::put('/{task}', 'update')->name('update');
+        Route::delete('/{task}/delete', 'delete')->name('delete');
+    });
 });

@@ -10,10 +10,17 @@
             <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-three-dots-vertical"></i>
             </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="{{$task->id}}/edit">Edit</a></li>
-                <li><a class="dropdown-item" href="#">Delete</a></li>
-            </ul>
+            
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{{$task->id}}/edit">Edit</a></li>
+                    <form action="/{{$task->id}}/delete" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="dropdown-item">
+                            Delete
+                        </button>
+                    </form>
+                </ul>
         </div>
     </div>
     
