@@ -10,10 +10,11 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Category; 
 use App\Enums\TaskStatus; 
-use App\Utils\Formatter\CollectionFormatter;
 
 class TaskController extends Controller
-{
+{   
+    public CollectionFormatter $formatter; 
+
     public function index(): View
     {
         $tasks = Task::all();
@@ -24,13 +25,19 @@ class TaskController extends Controller
 
     public function create(): View
     {
-        return $this->renderFormView(new Task()); 
+        return view('tasks.form', [
+            'states'     => TaskStatus::asSelectOptions(),
+            'categories' => Category::asSelectOptions(),
+        ]);
     }
 
-    public function edit($taskId): View 
+    public function edit(Task $task): View 
     {
-        $task = Task::findOrFail($taskId); 
-        return $this->renderFormView($task);
+        return view('tasks.form', [
+            'task'       => $task,
+            'states'     => TaskStatus::asSelectOptions(),
+            'categories' => Category::asSelectOptions(),
+        ]);
     }
 
     public function store(TaskRequest $request)
@@ -46,17 +53,5 @@ class TaskController extends Controller
     public function delete(Task $task)
     {
         DB::transaction(fn() => $task->delete(), attempts: 3);
-    }
-
-    public function renderFormView($task = null): View 
-    {
-        $states = CollectionFormatter::formatCollection(TaskStatus::cases());
-        $categories = CollectionFormatter::formatCollection(Category::all(), 'id', 'name');
-
-        return view('tasks.form', [
-            'states'        => $states,
-            'categories'    => $categories,
-            'task'          => $task,
-        ]);
     }
 }
