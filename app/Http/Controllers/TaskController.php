@@ -46,7 +46,7 @@ class TaskController extends Controller
 
     public function update(TaskRequest $request, Task $task)
     {   
-        $task->update($request->validated());
+        DB::transaction(fn() => $task->update($request->validated()));
     }
 
     public function delete(Task $task)
