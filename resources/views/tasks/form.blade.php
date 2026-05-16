@@ -13,9 +13,15 @@
        @if($isEdit)
             @method('PUT')
         @endif
-        <span class="text-[20px] text-red-800">
-            {{ $isEdit ? 'Edit task' : 'New task'}}
-        </span>
+        <div class="flex flex-row justify-between">   
+            <span class="text-[20px] text-red-800">
+                {{ $isEdit ? 'Edit task' : 'New task'}}
+            </span>
+            <a href="/" class="btn btn-outline-danger">
+                <i class="bi bi-arrow-left text-black"></i>
+            </a>
+        </div>
+        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
