@@ -10,7 +10,7 @@ use App\Models\Task;
 uses(TestCase::class, RefreshDatabase::class);
 
 beforeEach(function () {
-    // Assign
+    // Arrange
     $this->task = Task::factory()->create();
 });
 
@@ -27,7 +27,7 @@ test('task is edited in database', function () {
     });
 
 test('task edit does not pass validation on wrong input', function () {
-        // Assign
+        // Arrange
         $title = $this->task->titel; 
 
         // Act
@@ -43,7 +43,7 @@ test('task edit does not pass validation on wrong input', function () {
     });
 
 test('task edit does not pass validation on empty input', function () {
-        // Assign
+        // Arrange
         $title = $this->task->titel; 
 
         // Act

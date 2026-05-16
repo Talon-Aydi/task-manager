@@ -10,7 +10,7 @@ use App\Models\Task;
 uses(TestCase::class, RefreshDatabase::class);
 
 test('task is created in database', function () {
-        // Assign 
+        // Arrange 
         $task = Task::factory()->raw();
 
         // Act
@@ -37,7 +37,7 @@ test('task does not pass validation on empty form', function () {
 });
 
 test('task does not pass if date is in past', function () {
-    // Assign
+    // Arrange
     $invalidData = Task::factory()->raw([
         'deadline' => now()->subDay()->format('Y-m-d H:i:s')
     ]);
