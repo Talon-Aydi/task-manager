@@ -8,4 +8,4 @@ After installing all the dependencies, create the .env
 To proceed and run the web application, generate a key by executing the following line 
 ```php artisan key:generate```
 
-Once the .env docum
+Once the .env document has been 
