@@ -39,7 +39,7 @@
             Deadline: 
         </span>
         <span>
-            {{$task->deadline}}
+            {{ $task->deadline_date }} at {{$task->deadline_time}}
         </span>
     </div>
     <div>
