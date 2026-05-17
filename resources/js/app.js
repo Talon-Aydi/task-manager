@@ -1,5 +1,5 @@
-import { sortingTasks } from './utils/sorting.js';
+import { sortingTasks } from "./utils/sorting.js";
 
-addEventListener("DOMContentLoaded", (event) => { 
+addEventListener("DOMContentLoaded", (event) => {
     sortingTasks();
-})
+});
