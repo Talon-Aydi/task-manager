@@ -13,7 +13,7 @@ class RedirectAfterWrite
         $response = $next($request); 
 
         if (in_array($request->method(), ['POST', 'PUT', 'DELETE']) && $response->getStatusCode() === 200) {
-            return to_route('tasks.overview');
+            return to_route('tasks.task-index');
         }
         return $next($request);
     }

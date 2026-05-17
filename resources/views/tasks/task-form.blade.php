@@ -1,7 +1,3 @@
-@php
-    $isEdit = isset($task) && $task->exists;
-@endphp
-
 <x-layout>
     <div class="m-auto w-[30rem]">
         <form
