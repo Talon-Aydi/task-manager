@@ -9,6 +9,9 @@
                     Create task
                 </a>
             </div>
+            <div class="flex flex-row justify-end">
+                <x-filter.sort /> 
+            </div>
             <div class="space-y-3 overflow-y h-[35rem] overflow-auto">
                 @forelse ($tasks as $task)
                     <x-tasks.card :task="$task" />
