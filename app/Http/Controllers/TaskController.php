@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TaskRequest; 
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Models\Task;
 use Illuminate\View\View;
 use App\Models\Category; 
@@ -12,11 +14,17 @@ use App\Enums\TaskStatus;
 
 class TaskController extends Controller
 {   
-    public function index(): View
+    public function index(Request $request): View|Response
     {
-        return view('tasks.overview', [
-            'tasks' => Task::all(),
-        ]);
+        $tasks = Task::applySorting($request->query('sort'))->get(); 
+
+        if ($request->ajax()) {
+            return response(
+                view('tasks.overview', compact('tasks'))->fragment('task-list')
+            );
+        }
+
+        return view('tasks.overview', compact('tasks'));
     }
 
     public function create(): View

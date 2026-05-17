@@ -12,12 +12,14 @@
             <div class="flex flex-row justify-end">
                 <x-filter.sort /> 
             </div>
-            <div class="space-y-3 overflow-y h-[35rem] overflow-auto">
-                @forelse ($tasks as $task)
-                    <x-tasks.card :task="$task" />
-                @empty 
-                    <p> No tasks found. </p>
-                @endforelse
+            <div class="space-y-3 overflow-y h-[35rem] overflow-auto" id="task-container">
+                @fragment('task-list')
+                    @forelse ($tasks as $task)
+                        <x-tasks.card :task="$task" />
+                    @empty 
+                        <p> No tasks found. </p>
+                    @endforelse
+                @endfragment
             </div>
         </div>
     </div>

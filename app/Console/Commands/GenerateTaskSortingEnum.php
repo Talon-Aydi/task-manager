@@ -7,14 +7,14 @@ use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use App\Enums\Sorting; 
 
-#[Signature('enums:generate')]
+#[Signature('generate:task-sorting-options')]
 #[Description('Command description')]
-class GenerateJsEnums extends Command
+class GenerateTaskSortingEnum extends Command
 {
     public function handle()
     {
         $enums = [
-            'Sorting' => array_column(Sorting::cases(), 'value', 'name'),
+            'SortingOptions' => array_column(Sorting::cases(), 'value', 'name'),
         ];
 
         $content = "// AUTO-GENERATED FILE. \n\n";
@@ -22,6 +22,6 @@ class GenerateJsEnums extends Command
             $content .= "export const {$name} = " . json_encode($values, JSON_PRETTY_PRINT) . ";\n\n";
         }
 
-        file_put_contents(resource_path('js/enums.js'), $content);
+        file_put_contents(resource_path('js/enums/taskSortingOptions.js'), $content);
     }
 }

@@ -8,8 +8,9 @@ enum Sorting: string
 {
     case LastUpdated = 'Last Updated'; 
     case FirstUpdated = 'First updated'; 
-    case StatusDesc = 'Status decending';
-    case StatusAsc = 'Status ascending';
+    case ToDo = 'To do';
+    case InProgress = 'In progress';
+    case Done = 'Done'; 
 
     public static function asSelectOptions(): Collection
     {

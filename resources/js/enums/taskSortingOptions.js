@@ -3,7 +3,8 @@
 export const Sorting = {
     "LastUpdated": "Last Updated",
     "FirstUpdated": "First updated",
-    "StatusDesc": "Status decending",
-    "StatusAsc": "Status ascending"
+    "ToDo": "To do",
+    "InProgress": "In progress",
+    "Done": "Done"
 };
 
