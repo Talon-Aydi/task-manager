@@ -20,27 +20,29 @@ class TaskController extends Controller
 
         if ($request->ajax()) {
             return response(
-                view('tasks.overview', compact('tasks'))->fragment('task-list')
+                view('tasks.task-index', compact('tasks'))->fragment('task-list')
             );
         }
 
-        return view('tasks.overview', compact('tasks'));
+        return view('tasks.task-index', compact('tasks'));
     }
 
     public function create(): View
     {
-        return view('tasks.form', [
+        return view('tasks.task-form', [
             'states'     => TaskStatus::asSelectOptions(),
             'categories' => Category::asSelectOptions(),
+            'isEdit'     => false,
         ]);
     }
 
     public function edit(Task $task): View 
     {
-        return view('tasks.form', [
+        return view('tasks.task-form', [
             'task'       => $task,
             'states'     => TaskStatus::asSelectOptions(),
             'categories' => Category::asSelectOptions(),
+            'isEdit'     => true,
         ]);
     }
 
